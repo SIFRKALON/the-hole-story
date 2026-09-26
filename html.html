@@ -545,6 +545,13 @@ function s3(t){
   fillInk('navy',()=>{ctx.rect(0,0,236,520);ctx.rect(724,0,236,520);},.75);
   const boards=[[18,30,196,104,'pink','WANT'],[30,150,172,78,'yellow','MORE'],[14,246,208,110,'pink','NOW'],[744,24,196,86,'yellow','BUY'],[738,126,208,124,'pink','YOU']];
   boards.forEach(([x,y,w,h,col,s],i)=>{const dim=hash(i*7+Math.floor(T*2.5))>.82?.45:1;paint('paper',()=>ctx.fillRect(x,y,w,h),dim);fillInk(col,()=>wrect(x,y,w,h,i,.8),.9);txt(s,x+w/2,y+h/2+3,{font:`${Math.round(h*.42)}px ${F.bagel}`,col:'navy',a:dim});});
+  {const x=756,y=268,w=176,h=90;paint('paper',()=>ctx.fillRect(x,y,w,h));
+   if(t<9.2){fillInk('blue',()=>ctx.rect(x,y,w,h),.22);txt('♥ KISS CAM ♥',x+w/2,y+13,{font:`500 12px ${F.mono}`,col:'pink',ls:'1px'});
+     const hb=1+.07*Math.sin(T*5);ctx.save();ctx.translate(x+w/2,y+54);ctx.scale(hb,hb);paint('pink',()=>{ctx.lineWidth=3;ctx.beginPath();heart(0,6,58);ctx.stroke();});ctx.restore();
+     fillPaint('navy',()=>{E(x+w/2-15,y+62,11,9);E(x+w/2-15,y+61,3.5,2.2);},1,'evenodd');
+     paint('pink',()=>{ctx.lineWidth=2.5;ctx.lineCap='round';const cx=x+w/2+17,cy=y+56;line(cx-7,cy-12,cx-7,cy+14);line(cx-8,cy+3,cx+8,cy+3);line(cx+7,cy+3,cx+7,cy+14);});}
+   else{for(let k=0;k<14;k++)fillInk(['pink','blue','yellow'][k%3],()=>ctx.rect(x,y+hash(k+boil)*h,w,3+hash(k*2+boil)*6),.6);fillPaint('navy',()=>ctx.rect(x+38,y+34,100,22));txt('NO SIGNAL',x+w/2,y+45,{font:`500 13px ${F.mono}`,col:'paper',ls:'1px'});}
+   paint('navy',()=>{ctx.lineWidth=4;ctx.strokeRect(x,y,w,h);});}
   // the big Other
   const X0=250,Y0=26,BW=460,BH=306;
   fillPaint('navy',()=>wrect(X0-10,Y0-10,BW+20,BH+20,51,1));
@@ -552,12 +559,12 @@ function s3(t){
   paint('paper',()=>ctx.fillRect(X0,Y0,BW,BH));ink('yellow',()=>ctx.fillRect(X0,Y0,BW,BH),.4);htFill('pink',1.3,6,()=>ctx.rect(X0,Y0,BW,BH),.35);
   const blink=(Math.abs(t-2.6)<.12||Math.abs(t-8.2)<.12)?.08:1;
   const ecx=480,ecy=158,ew=175,eh=78*blink;
-  let px=0,py=0;if(t>9.2){px=Math.sin(T*9)*55;py=Math.cos(T*7)*14;}else if(t<3){px=Math.sin(t*2.1)*60;py=Math.cos(t*1.3)*12;}else{const k=ease(seg(t,3,3.8));px=lerp(Math.sin(3*2.1)*60,0,k);py=lerp(0,34,k);}
+  let px=0,py=0;if(t>9.2){px=Math.sin(T*9)*55;py=Math.cos(T*7)*14;}else if(t<3){px=Math.sin(t*2.1)*60;py=Math.cos(t*1.3)*12;}else{const k=ease(seg(t,3,3.8));px=lerp(Math.sin(3*2.1)*60,-12,k);py=lerp(0,34,k);}
   const pr=24;
   ctx.save();ctx.beginPath();const alm=()=>{ctx.moveTo(ecx-ew,ecy);ctx.quadraticCurveTo(ecx,ecy-eh*2,ecx+ew,ecy);ctx.quadraticCurveTo(ecx,ecy+eh*2,ecx-ew,ecy);ctx.closePath();};alm();ctx.fillStyle=C.paper;ctx.fill();ctx.clip();
   fillInk('blue',()=>Ci(ecx+px,ecy+py,58));htFill('navy',1.6,5,()=>Ci(ecx+px,ecy+py,58),.5);fillPaint('navy',()=>Ci(ecx+px,ecy+py,pr));fillPaint('paper',()=>Ci(ecx+px+16,ecy+py-16,9));ctx.restore();
   paint('navy',()=>{ctx.lineWidth=7;ctx.lineJoin='round';ctx.beginPath();alm();ctx.stroke();ctx.lineWidth=5;ctx.lineCap='round';for(let i=-3;i<=3;i++){const a=-PI/2+i*.22;line(ecx+Math.cos(a)*ew*.62,ecy-eh+Math.sin(a)*14-10,ecx+Math.cos(a)*ew*.7,ecy-eh+Math.sin(a)*22-22);}});
-  const msg=t<3?'BE YOURSELF™   ·   BE YOURSELF™   ·   ':t<6.4?'CHE VUOI?   ·   WHAT DO YOU WANT?   ·   ':t<9.2?'WHAT DO YOU WANT?   ·   WHAT DO YOU WANT?   ·   ':t<10.6?'WHAT DO  I  WANT?   ·   WHAT DO  I  WANT?   ·   ':'?   ?   ERR   ?   ?   ?   ';
+  const msg=t<3?'YOUR DATE HAS ARRIVED ♥   ·   BE YOURSELF™   ·   ':t<6.4?'CHE VUOI?   ·   WHAT DO YOU WANT?   ·   ':t<9.2?'WHAT DO YOU WANT?   ·   WHAT DO YOU WANT?   ·   ':t<10.6?'WHAT DO  I  WANT?   ·   WHAT DO  I  WANT?   ·   ':'?   ?   ERR   ?   ?   ?   ';
   paint('navy',()=>ctx.fillRect(X0,Y0+BH-44,BW,44));
   ctx.save();ctx.font=`500 22px ${F.mono}`;const mw=ctx.measureText(msg).width;ctx.restore();
   const off=(t*120)%mw;for(let k=-1;k<3;k++)txt(msg,X0-off+k*mw,Y0+BH-21,{font:`500 22px ${F.mono}`,col:'yellow',align:'left'});
@@ -567,13 +574,20 @@ function s3(t){
   fillInk('navy',()=>ctx.rect(0,520,W,80),.85);
   paint('paper',()=>{for(let i=0;i<12;i++)ctx.fillRect(40+i*80,540,44,60);},.55);
   if(t>.8&&t<6.5){const tx=lerp(-220,1180,seg(t,.8,6.5)),ty=452;fillPaint('paper',()=>{wrect(tx,ty,190,50,95,1);wrect(tx+40,ty-28,100,30,96,1);});fillInk('yellow',()=>{wrect(tx,ty,190,50,95,1);wrect(tx+40,ty-28,100,30,96,1);});paint('navy',()=>{for(let i=0;i<10;i++)if(i%2)ctx.fillRect(tx+10+i*17,ty+24,17,7);ctx.beginPath();Ci(tx+40,ty+52,14);Ci(tx+150,ty+52,14);ctx.fill();ctx.fillRect(tx+78,ty-38,34,10);});fillInk('blue',()=>{ctx.rect(tx+48,ty-22,38,20);ctx.rect(tx+94,ty-22,38,20);},.5);}
-  const s=.85,leave=t>10.8,bx3=leave?lerp(480,1080,easeIn(seg(t,10.8,12))):480;
+  // a table for two in the plaza; the other seat is taken by the whole city
+  const chair=x=>{const c=()=>{ctx.rect(x-20,440,40,7);ctx.rect(x-20,440,5,50);ctx.rect(x+15,440,5,50);ctx.rect(x-23,486,46,6);ctx.rect(x-20,492,4,28);ctx.rect(x+16,492,4,28);};fillPaint('paper',c);fillInk('pink',c,.95);fillInk('yellow',c,.45);};
+  chair(470);chair(662);
+  fillPaint('paper',()=>E(566,470,46,8));fillInk('blue',()=>E(566,470,46,8),.2);paint('navy',()=>{ctx.lineWidth=2;ctx.beginPath();E(566,470,46,8);ctx.stroke();ctx.fillRect(564,476,4,44);ctx.beginPath();E(566,519,18,3);ctx.fill();});
+  fillPaint('paper',()=>ctx.rect(561,452,10,16));fillInk('blue',()=>ctx.rect(561,452,10,16),.35);
+  fillInk('blue',()=>{ctx.rect(565,436,2,18);E(572,446,5,2.5,-.5);},.8);fillInk('yellow',()=>{ctx.rect(565,436,2,18);E(572,446,5,2.5,-.5);});
+  const rose=()=>Ci(566,433,8);fillPaint('paper',rose);fillInk('pink',rose);fillInk('pink',()=>{ctx.arc(566,433,4,0,5);},.9);
+  const s=.85,leave=t>10.8,bx3=leave?lerp(470,-140,easeIn(seg(t,10.8,12))):470,by3=leave?520-72*s:486-50*s;
   const bm=t<3?'happy':t<5.6?'shock':t<9.3?'nervous':t<10.8?'think':'calm';
-  bagel(bx3,520-72*s,s,{mood:bm,walk:leave?t*3:null,look:t<3?Math.sin(t*2.1):0,arms:t>=3&&t<5.6?'up':'down'});
-  for(let i=0;i<14;i++){const dir=i%2?1:-1,sp=40+hash(i)*50,x=((hash(i+2)*1200+dir*t*sp)%1200+1200)%1200-120;if(Math.abs(x-480)<70)continue;const y=560+hash(i+5)*20;fillPaint('navy',()=>{Ci(x,y-26,11);wrect(x-15,y-14,30,60,i,1);});}
-  twinkle(lerp(600,1010,easeIn(seg(t,10.8,12)))+Math.sin(T*1.6)*16,382+Math.cos(T*2)*8,seg(t,.5,.8));
-  bubble(680,420,'i want… whatever you want me to want?',t,5.6,9.2,{tail:[-150,24],w:230});
-  bubble(690,420,"…you don't know either, huh?",t,9.5,10.9,{tail:[-160,24],w:220});
+  bagel(bx3,by3,s,{sit:!leave,mood:bm,walk:leave?t*3:null,look:t<3?Math.sin(t*2.1):t<9.3?.6:0,arms:t>=3&&t<5.6?'up':'down',noShadow:!leave});
+  for(let i=0;i<14;i++){const dir=i%2?1:-1,sp=40+hash(i)*50,x=((hash(i+2)*1200+dir*t*sp)%1200+1200)%1200-120;if(x>390&&x<720)continue;const y=560+hash(i+5)*20;fillPaint('navy',()=>{Ci(x,y-26,11);wrect(x-15,y-14,30,60,i,1);});}
+  twinkle(lerp(662,1010,easeIn(seg(t,10.8,12)))+Math.sin(T*1.6)*12,404+Math.cos(T*2)*8,seg(t,.5,.8));
+  bubble(690,372,'i want… whatever you want me to want?',t,5.6,9.2,{tail:[-180,62],w:230});
+  bubble(690,380,"…you don't know either, huh?",t,9.5,10.9,{tail:[-190,55],w:220});
 }
 
 function s4(t){
