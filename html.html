@@ -450,14 +450,10 @@ function s1(t){
   fillInk('blue',()=>ctx.rect(0,332,W,7),.6);
   fillPaint('navy',()=>wrect(292,30,376,124,4,1));
   for(const [i,s] of ['PASTRAMI ··········· 24','LOX & SCHMEAR ······ 14','EGG CREAM ··········· 5'].entries())txt(s,480,62+i*30,{font:`500 16px ${F.mono}`,col:'paper'});
-  for(const fx of[80,784]){fillPaint('navy',()=>wrect(fx,70,96,122,fx,1));paint('paper',()=>ctx.fillRect(fx+8,78,80,106));htFill('blue',1.5,5,()=>ctx.rect(fx+8,78,80,106),.7);fillPaint('navy',()=>{E(fx+48,138,25,20);E(fx+48,134,7,4.5);},1,'evenodd');}
-  txt('GRANDPA',128,206,{font:`500 10px ${F.mono}`,ls:'1px'});txt('UNCLE SAUL',832,206,{font:`500 10px ${F.mono}`,ls:'1px'});
   for(let r=0;r<4;r++)for(let c=0;c<25;c++)if((r+c)%2)fillInk('blue',()=>ctx.rect(c*40,500+r*34,40,34),.42);
   paint('navy',()=>ctx.fillRect(0,498,W,3));
   // salamis
-  for(const [sx,len] of [[22,48],[205,70],[248,50],[712,66],[748,44],[932,56]]){ctx.save();ctx.translate(sx,0);ctx.rotate(Math.sin(T*1.3+sx)*.06);paint('navy',()=>{ctx.lineWidth=1.5;line(0,0,0,len);});const sal=()=>E(0,len+22,10,24);fillInk('pink',sal,.9);fillInk('navy',sal,.22);paint('paper',()=>{for(let k=0;k<4;k++){ctx.beginPath();Ci((hash(k+sx)-.5)*10,len+10+k*9,1.4);ctx.fill();}},.8);ctx.restore();}
-  // now serving
-  fillPaint('navy',()=>ctx.roundRect(46,224,100,52,4));txt('NOW SERVING',96,238,{font:`500 9px ${F.mono}`,col:'paper',ls:'1px'});txt('57',96,259,{font:`24px ${F.bagel}`,col:'pink'});
+  for(const [sx,len] of [[70,58],[730,64],[930,50]]){ctx.save();ctx.translate(sx,0);ctx.rotate(Math.sin(T*1.3+sx)*.06);paint('navy',()=>{ctx.lineWidth=1.5;line(0,0,0,len);});const sal=()=>E(0,len+22,10,24);fillInk('pink',sal,.9);fillInk('navy',sal,.22);paint('paper',()=>{for(let k=0;k<4;k++){ctx.beginPath();Ci((hash(k+sx)-.5)*10,len+10+k*9,1.4);ctx.fill();}},.8);ctx.restore();}
   // the cookie couple in the booth
   const drama=t>5.5&&t<10.2;
   fillInk('blue',()=>ctx.roundRect(24,340,200,86,12),.45);
